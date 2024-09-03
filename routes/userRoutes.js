@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { updateUser } = require('../controllers/userController');
+const { createUser, updateUser } = require('../controllers/userController');
 
-router.post('/update-user', updateUser);
+router.post('/create-user', createUser);
+router.post('/update-user', updateUser);  // Add this line for the update route
 
 module.exports = router;
