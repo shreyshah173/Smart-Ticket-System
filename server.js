@@ -1,4 +1,22 @@
-const app = require('express')();
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+const app = express();
+
+// Parse JSON bodies
+app.use(express.json());
+
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('Failed to connect to MongoDB', err));
+
+// Routes
+app.use('/api', require('./routes/userRoutes'));
 
 app.get('/', (req, res) => {
   res.send('Yoo babes');
